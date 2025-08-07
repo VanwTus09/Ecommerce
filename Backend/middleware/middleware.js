@@ -5,5 +5,17 @@ const authenToken = (req, res, next) =>{
     if(!token) {
         return res.status(401).json({error : "Missing token"})
     }
+    next()
+
+
+  // Kiểm tra và giải mã token
+  jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, user) => {
+    if (err) {
+      return res.status(403).json({ error: "Invalid token" });
+    }
+    // Lưu thông tin người dùng vào request
+    req.user = user;
+    next();
+  });
 }
-// kiểm tra và giải mã token  
+
