@@ -1,18 +1,19 @@
 import mongoose from "mongoose"
 
 const schema = new mongoose.Schema({
-    username : {
+    name : {
         type : String, 
-        required : true
-        
+        required : true,
+        min : 2,
     } ,
     password : {
         type : String,
-        required : true
+        required : true,
+        min : 6,
     },
     email : {
         type : String,
-        require,
+        required : true,
         unique : true,  
     }
 

@@ -33,11 +33,10 @@ const schema = new mongoose.Schema({
         type : String,
     },
     Region : {
-        type : "NorthernVN" || "SouthernVN" || "CentralVN"
+        type : "Northern VN" || "Southern VN" || "Central VN"
     },
     slots : {
         type : Number
     }
-
 })
 export const TourModel = mongoose.model("Tour",schema)
