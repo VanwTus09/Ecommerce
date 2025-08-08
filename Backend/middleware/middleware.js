@@ -5,9 +5,6 @@ const authenToken = (req, res, next) =>{
     if(!token) {
         return res.status(401).json({error : "Missing token"})
     }
-    next()
-
-
     // Verify token
     jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, user) => {
     if (err) {
@@ -18,4 +15,4 @@ const authenToken = (req, res, next) =>{
     next();
     });
 }
-
+export default authenToken;

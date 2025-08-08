@@ -14,7 +14,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
         <div className="hidden md:flex space-x-8 text-white">
           <a href="#destinations" className="hover:text-[#D9EFF7] transition-colors duration-300">Destinations</a>
           <a href="#tours" className="hover:text-[#D9EFF7] transition-colors duration-300">Tours</a>
-          <a href="#contact" className="hover:text-[#D9EFF7] transition-colors duration-300">Contact</a>
+          <a href="#contact" className="hover:text-[#D9EFF7] transition-colors duration-300">Login</a>
         </div>
       </div>
     </nav>
