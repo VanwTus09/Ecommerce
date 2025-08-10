@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import express from "express";
 import cookieParser from "cookie-parser";
 import authRoutes from "./Routes/auth.js";
+import cors from 'cors'
 import userRouter from "./Routes/user.js"
 import { mongooseConnection }  from './config/db.js';
 const app = express();
@@ -14,7 +15,10 @@ mongooseConnection();
 app.use(express.json());
 app.use(cookieParser());
 //
-
+app.use(cors({
+  origin: "http://localhost:5173", // hoặc cổng FE của bạn
+  credentials: true
+}));
 // Route test
 app.get('/', (req, res) => {
   res.send('Hello from Express + MongoDB!');
