@@ -1,26 +1,22 @@
-import { Navigation, HeroSection, CallToActionSection, Footer, FeaturesSection, DestinationsSection } from "./components/Home";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { SigninForm } from "./components/pages/Login/Signin";
+import Home from "./components/pages/Home/home";
+import { SignupForm } from "./components/pages/Login/Signup";
 
-function App() {
+function App() { 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#D9EFF7] to-[#9BBBFC]">
-      {/* Navigation */}
-      <Navigation />
-      
-      {/* Hero Section */}
-      <HeroSection />
-
-      {/* Destinations Section */}
-      <DestinationsSection />
-
-      {/* Features Section */}
-      <FeaturesSection />
-
-      {/* Call to Action Section */}
-      <CallToActionSection />
-
-      {/* Footer */}
-      <Footer />
-    </div>
+  <BrowserRouter>
+    <Routes>
+      //Public routes
+      <Route path="/Signin" element={<SigninForm/>}/>
+      <Route path="/Signup" element={<SignupForm/>}/>
+      <Route path="/" element={<Home/>}/>
+      //Private routes
+     <Route>
+      <Route></Route>
+      </Route>
+    </Routes>
+  </BrowserRouter>
   );
 }
 

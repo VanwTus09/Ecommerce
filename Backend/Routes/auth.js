@@ -37,7 +37,7 @@ router.post('/register', async (req, res) => {
 
     // Nếu model của bạn có _id tự tạo bởi Mongo thì không cần truyền id
     const user = new UserModel({
-      name: req.body.name,
+      username: req.body.username,
       email: req.body.email,
       password: hashPassword,
     });
@@ -78,7 +78,7 @@ router.post('/login', async (req, res) => {
     });
 
     // Trả access token cho client (FE lưu ở memory hoặc localStorage tuỳ chiến lược)
-    res.json({ accessToken, user: { id: user._id, name: user.name, email: user.email } });
+    res.json({ accessToken, user: { id: user._id, username: user.username, email: user.email } });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });

@@ -7,7 +7,7 @@ dotenv.config(); // để đọc file .env
 // Payload giả để test
 const payload = {
   id: "1234567890",
-  name: "Test User",
+  username: "Test User",
   email: "test@example.com"
 };
 

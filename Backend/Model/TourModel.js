@@ -37,6 +37,10 @@ const schema = new mongoose.Schema({
     },
     slots : {
         type : Number
+    },
+    comments : {
+        type : String
     }
+
 })
 export const TourModel = mongoose.model("Tour",schema)

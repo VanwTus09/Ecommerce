@@ -1,4 +1,3 @@
-"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -7,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
+  
   FormField,
   FormItem,
   FormLabel,
@@ -21,11 +20,12 @@ const formSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
-  email: z.string().min(1),
-  password: z.string().min(1),
+  email: z.string().email({message : "Please enter a valid email address."}),
+  password: z.string().min(6),
 });
 
-export function SignupForm() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function SignupForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void; onClose?: () => void}) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,16 +37,23 @@ export function SignupForm() {
   type FormValues = z.infer<typeof formSchema>;
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (values: FormValues) => {
-    if (isLoading) return <div>Đang tải ...</div>;
-    AxiosInstance.post("/api/auth/register", {
+   try {
+      const res = await AxiosInstance.post("/api/auth/register", {
       email: values.email,
       username: values.username,
       password: values.password,
-    })
-      .then()
-      .catch();
-    toast.success("Register success!");
-    console.log(values, "valuesss");
+      })
+      if(res){
+      toast.success("Register success!");
+      form.reset();
+      if (onSuccess) onSuccess(res.data);
+      if (onClose) onClose();
+      console.log(values, "valuesss");
+    }
+    return res.data
+   }catch(err){
+    console.log( 'Fail ', err)
+   }
   };
   return (
     <Form {...form}>
@@ -56,13 +63,11 @@ export function SignupForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your email" value={field.value} />
+                <Input placeholder="Enter your email" value={field.value} onChange={field.onChange} />
               </FormControl>
-              <FormDescription>
-                This is your public display email.
-              </FormDescription>
+              
               <FormMessage />
             </FormItem>
           )}
@@ -74,11 +79,8 @@ export function SignupForm() {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your username" value={field.value} />
+                <Input placeholder="Enter your username" value={field.value} onChange={field.onChange}/>
               </FormControl>
-              <FormDescription>
-                This is your public display username.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -88,18 +90,16 @@ export function SignupForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your password" value={field.value} />
+                <Input placeholder="Choose a strong password (min 6 chars)." value={field.value} onChange={field.onChange} type="password" />
               </FormControl>
-              <FormDescription>
-                This is your public display password.
-              </FormDescription>
+             
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={isLoading}>Submit</Button>
       </form>
     </Form>
   );
