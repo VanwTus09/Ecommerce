@@ -40,6 +40,12 @@ const schema = new mongoose.Schema({
     },
     comments : {
         type : String
+    },
+    imageUrl : {
+        type : String,
+    },
+    description : {
+        type : String
     }
 
 })

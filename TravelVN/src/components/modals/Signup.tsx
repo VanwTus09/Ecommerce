@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  
   FormField,
   FormItem,
   FormLabel,
@@ -15,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { AxiosInstance } from "@/api/axiosInstance";
+import { DialogDescription, DialogHeader, DialogTitle , Dialog, DialogContent} from "@/components/ui/dialog";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -56,18 +56,27 @@ export function SignupForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
    }
   };
   return (
+    <Dialog open>
+        <DialogContent className="overflow-hidden bg-white p-0 text-black z-50 w-[400px]">
+          <DialogHeader className="m-2">
+          <DialogTitle className=" text-3xl font-bold pl-4">
+            Sign up
+          </DialogTitle>
+          <DialogDescription className="text-zinc-500 pl-4 text-xl">
+            Sign up to your Vietnam Travel account and discover your fun anywhere
+          </DialogDescription>
+        </DialogHeader>
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mx-6 text-xl">
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Email (*)</FormLabel>
               <FormControl>
                 <Input placeholder="Enter your email" value={field.value} onChange={field.onChange} />
               </FormControl>
-              
               <FormMessage />
             </FormItem>
           )}
@@ -77,7 +86,7 @@ export function SignupForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Username (*)</FormLabel>
               <FormControl>
                 <Input placeholder="Enter your username" value={field.value} onChange={field.onChange}/>
               </FormControl>
@@ -90,17 +99,18 @@ export function SignupForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Password (*)</FormLabel>
               <FormControl>
                 <Input placeholder="Choose a strong password (min 6 chars)." value={field.value} onChange={field.onChange} type="password" />
               </FormControl>
-             
               <FormMessage />
             </FormItem>
           )}
-        />
-        <Button type="submit" disabled={isLoading}>Submit</Button>
+        /><div className="flex justify-center items-center py-2">
+        <Button type="submit" className="flex-1" disabled={isLoading}>{isLoading ? "Submiting..." : "Submit"}</Button></div>
       </form>
     </Form>
+    </DialogContent>
+    </Dialog>
   );
 }
