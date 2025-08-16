@@ -29,7 +29,6 @@ export function SigninForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
       email: "",
       password: "",
     },
@@ -37,7 +36,8 @@ export function SigninForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
   type FormValues = z.infer<typeof formSchema>;
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (values: FormValues) => {
-   try {
+    
+    try {
       const res = await AxiosInstance.post("/api/auth/login", {
       email: values.email,
       password: values.password,
@@ -45,6 +45,7 @@ export function SigninForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
       if(res){
       toast.success("Register success!");
       form.reset();
+      
       if (onSuccess) onSuccess(res.data);
       if (onClose) onClose();
       console.log(values, "valuesss");

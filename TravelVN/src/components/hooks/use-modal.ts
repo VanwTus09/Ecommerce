@@ -7,7 +7,6 @@ export type ModalType =
 interface ModalData {
     user : User,
     tour : Tour,
-
 } 
 interface ModalStore {
   type: ModalType | null;
