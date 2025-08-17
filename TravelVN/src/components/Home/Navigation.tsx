@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { SignupForm } from "../modals/Signup";
+import { Link } from "react-router-dom";
 
 interface NavigationProps {
   className?: string;
@@ -25,12 +26,12 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
           >
             Destinations
           </a>
-          <a
-            href="#tours"
+          <Link
+            to="ListTour"
             className="hover:text-[#D9EFF7] transition-colors duration-300"
           >
             Tours
-          </a>
+          </Link>
           {show && <SignupForm />}
           <div
             ref={LoginRef}

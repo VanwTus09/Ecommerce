@@ -48,7 +48,7 @@ const schema = new mongoose.Schema({
       content: String,
       createdAt: { type: Date, default: Date.now },
     },
-  ], // ✅ comments cho hợp lý
+  ],
   imageUrl: {
     type: String,
   },

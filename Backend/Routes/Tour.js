@@ -1,12 +1,9 @@
-import express from 'express'
-import { TourModel } from '../Model/TourModel.js'
+import express from "express";
+import { getAllTours, createTour } from "../controller/Tour.js"
+
 const router = express.Router();
-router.get('/', async(req,res) =>{
-    try {
-        const tour = TourModel.find({})
-        res.json(tour)
-    } catch (error) {
-        res.status(500).send(`This error is : ${err}`)
-    }
-})
+
+router.get("/", getAllTours);   // gọi controller getAllTours
+router.post("/createTour", createTour);  // gọi controller createTour
+
 export default router;

@@ -1,14 +1,8 @@
 import express from 'express'
-import { UserModel } from '../Model/UserModel.js'
 import authenToken from '../middleware/middleware.js';
+import { GetUser } from '../controller/user.js';
 const router = express.Router();
 
-router.get('/' ,authenToken, async (req,res) => {
-    try{
-        const users = await UserModel.find({})
-        res.json(users)
-    }catch(err){
-        res.status(500).send(`This error is : ${err}`)
-    }
-})
+router.get('/', authenToken,GetUser );
 export default router;
+
