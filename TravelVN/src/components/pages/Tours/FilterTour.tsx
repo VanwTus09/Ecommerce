@@ -1,11 +1,17 @@
-export const FilterTour = () =>{
-    <div>
-    <form className="rounded-md text-gray-400">
-        <h1>Budget</h1>  // chọn option
-        <h2>Điểm khởi hành </h2> // Cho chọn HCM ĐN HN
-        <h3>Region</h3>  .. Chọn Bắc Trung Nam
-        <h4>Ngày đi</h4>
-        <h5>Phương tiện</h5> // Xe và máy bay 
-    </form>
+// src/components/pages/Tours/FilterTour.tsx
+export const FilterTour = () => {
+  return (
+    <div className="p-4 border-r w-64">
+      <h3 className="text-lg font-bold">Bộ lọc tour</h3>
+      {/* thêm input, select,... ở đây */}
+      <div>
+        <label className="block text-sm">Địa điểm</label>
+        <input
+          type="text"
+          placeholder="Nhập địa điểm..."
+          className="border rounded p-1 w-full"
+        />
+      </div>
     </div>
-}
+  );
+};
