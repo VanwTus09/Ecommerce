@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { AxiosInstance } from "@/api/axiosInstance";
 import { DialogDescription, DialogHeader, DialogTitle , Dialog, DialogContent} from "@/components/ui/dialog";
+import { useModal } from "../hooks";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -25,7 +26,7 @@ const formSchema = z.object({
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function SignupForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void; onClose?: () => void}) {
+export function SignupForm({onSuccess } : {onSuccess?: (data?:any)=>void}) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,6 +37,9 @@ export function SignupForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
   });
   type FormValues = z.infer<typeof formSchema>;
   const isLoading = form.formState.isSubmitting;
+   const { isOpen, type, onClose  } = useModal();
+   if (type !== "signupform") return null; // ❗ chỉ render khi đúng type
+  if (!isOpen) return null;              // ❗ đóng khi false
   const onSubmit = async (values: FormValues) => {
    try {
       const res = await AxiosInstance.post("/api/auth/register", {
@@ -47,8 +51,8 @@ export function SignupForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
       toast.success("Register success!");
       form.reset();
       if (onSuccess) onSuccess(res.data);
-      if (onClose) onClose();
-      console.log(values, "valuesss");
+      onClose();
+      
     }
     return res.data
    }catch(err){
@@ -56,7 +60,9 @@ export function SignupForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
    }
   };
   return (
-    <Dialog open>
+    <Dialog open={isOpen} onOpenChange={(open) => 
+     !open && onClose() 
+    }>
         <DialogContent className="overflow-hidden bg-white p-0 text-black z-50 w-[400px]">
           <DialogHeader className="m-2">
           <DialogTitle className=" text-3xl font-bold pl-4">

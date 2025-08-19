@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { AxiosInstance } from "@/api/axiosInstance";
 import { DialogDescription, DialogHeader, DialogTitle , Dialog, DialogContent} from "@/components/ui/dialog";
+import { useModal } from "../hooks";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -25,7 +26,7 @@ const formSchema = z.object({
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function SigninForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void; onClose?: () => void}) {
+export function SigninForm({onSuccess } : {onSuccess?: (data?:any)=>void}) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,6 +36,9 @@ export function SigninForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
   });
   type FormValues = z.infer<typeof formSchema>;
   const isLoading = form.formState.isSubmitting;
+  const { isOpen, type, onClose , onSwitch} = useModal();
+  if (type !== "signinform") return null; // ❗ chỉ render khi đúng type
+  if (!isOpen) return null;              // ❗ đóng khi false
   const onSubmit = async (values: FormValues) => {
     
     try {
@@ -47,8 +51,8 @@ export function SigninForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
       form.reset();
       
       if (onSuccess) onSuccess(res.data);
-      if (onClose) onClose();
-      console.log(values, "valuesss");
+      onClose();
+      
     }
     return res.data
    }catch(err){
@@ -56,7 +60,8 @@ export function SigninForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
    }
   };
   return (
-    <Dialog open>
+    <Dialog open={isOpen} onOpenChange={(open) => 
+     !open && onClose() }>
         <DialogContent className="overflow-hidden bg-white p-0 text-black z-50 w-[400px] ">
           <DialogHeader className="m-2">
           <DialogTitle className=" text-3xl font-bold pl-4">
@@ -93,8 +98,11 @@ export function SigninForm({onSuccess ,onClose} : {onSuccess?: (data?:any)=>void
               <FormMessage />
             </FormItem>
           )}
-        /><div className="flex justify-center items-center py-2">
-        <Button type="submit" className="flex-1" disabled={isLoading}>{isLoading ? "Submiting..." : "Submit"}</Button></div>
+        /><div className="flex flex-col justify-center items-center py-2 gap-3">
+        <Button type="submit" className="flex-1 w-full " disabled={isLoading}>{isLoading ? "Submiting..." : "Submit"}</Button>
+        <span className="text-sm">Haven't account, please {""} <button onClick={()=> onSwitch('signupform')} className="text-red-300 text-base hover:cursor-pointer hover:underline">Register</button> with us</span>
+        </div>
+        
       </form>
     </Form>
     </DialogContent>
