@@ -49,8 +49,14 @@ export const register = async (req, res) => {
 // LOGIN
 export const login = async (req, res) => {
   try {
+    // tìm 1 user theo email
     const user = await UserModel.findOne({ email: req.body.email });
     if (!user) return res.status(401).json({ error: "Email or Password is not correct" });
+
+    // kiểm tra password
+    if (!req.body.password || !user.password) {
+      return res.status(400).json({ error: "Password missing" });
+    }
 
     const checkPassword = await bcrypt.compare(req.body.password, user.password);
     if (!checkPassword) return res.status(401).json({ error: "Email or Password is not correct" });
@@ -68,12 +74,17 @@ export const login = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.json({ accessToken, user: { id: user._id, username: user.username, email: user.email } });
+    res.json({
+      accessToken,
+      user: { id: user._id, username: user.username, email: user.email },
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
   }
 };
+
+
 
 // REFRESH
 export const refreshToken = async (req, res) => {

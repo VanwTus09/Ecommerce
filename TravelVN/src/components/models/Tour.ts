@@ -8,7 +8,7 @@ export interface Tour extends Destination , ApiResponse {
     cost : number,
     transportation: string,
     schedule: string,
-    slot : number,
+    slots : number,
     notes : string,
     comments : [],
     place_starting: string,

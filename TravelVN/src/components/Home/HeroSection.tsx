@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const HeroSection: React.FC = () => {
   return (
@@ -24,11 +25,12 @@ export const HeroSection: React.FC = () => {
             From the mystical waters of Ha Long Bay to the ancient charm of Hoi An, 
             experience the perfect blend of natural wonders and rich cultural heritage.
           </p>
-
+          <Link to="/ListTour" className="inline-block">
           <button className="group bg-[#4741A6] hover:bg-[#D9EFF7] hover:text-[#4741A6] text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl">
             Book Your Tour Now
             <ArrowRight className="inline ml-2 group-hover:translate-x-1 transition-transform duration-300" size={20} />
           </button>
+          </Link>
         </div>
       </div>
 

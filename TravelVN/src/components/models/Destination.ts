@@ -2,7 +2,7 @@ import type { ApiResponse } from "./Api-response";
 
 export interface Destination extends ApiResponse {
     name : string,
-    desciption : string,
+    description : string,
     Region : Regions,
     imageUrl : string,
 }
