@@ -52,16 +52,22 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
         <div className="hidden md:flex items-center space-x-8 text-white font-medium">
           <Link
             to="/ListTour"
-            className="hover:text-yellow-200 transition-colors duration-300"
+            className="
+          relative font-extrabold text-2xl  
+          bg-gradient-to-r from-yellow-400 via-gray-300 to-cyan-200 
+          bg-clip-text text-transparent 
+          hover:animate-pulse hover:rotate-2 hover:scale-105
+          transition-all duration-500
+          after:content-[''] after:absolute after:left-0 after:bottom-0 
+          after:w-0 after:h-[3px] after:bg-gradient-to-r after:from-yellow-300 after:to-cyan-200
+          hover:after:w-full after:transition-all after:duration-500
+        "
           >
             Tours
           </Link>
 
           {user ? (
             <div ref={menuRef} className="relative flex items-center space-x-2">
-              {/* Username */}
-              <span className="font-semibold">{user.email}</span>
-
               {/* Avatar */}
               <div
                 onClick={() => setOpenMenu(!openMenu)}
@@ -73,6 +79,8 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
                   className="rounded-full shadow-lg hover:bg-blue-700 transition duration-300"
                 />
               </div>
+              {/* Username */}
+              <span className="font-semibold">{user.email}</span>
 
               {/* Dropdown menu */}
               {openMenu && (

@@ -1,6 +1,6 @@
 import { Footer, Navigation } from "@/components/Home";
 import { useTourById } from "@/components/hooks/use-tour-by-id";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   Clock,
   ReceiptText,
@@ -122,9 +122,10 @@ export const TourDetail = () => {
             </div>
 
             {/* Button */}
+            <Link to={`/Payment/${tour?._id}`}>
             <Button className="bg-gradient-to-r  from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold text-lg  rounded-lg w-full shadow-md ">
               Đặt ngay
-            </Button>
+            </Button></Link>
           </div>
         </div>
       </div>

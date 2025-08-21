@@ -22,45 +22,90 @@ export const FilterTour: React.FC<FilterTourProps> = ({ onFilter }) => {
   const handleChange = (field: keyof FilterValues, value: string) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
   };
-  const [active, setActive] = useState(false);
-  const handleActive = () =>{
-    setActive(true);
-  }
+
+  // Xử lý chọn budget
+  const handleBudgetSelect = (budget: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      budget, // cập nhật budget
+    }));
+  };
+
+  // Clear filter
   const handleClear = () => {
-    setActive(false);
-  }
+    setFilters({
+      budget: "",
+      destination: "",
+      departure: "all",
+      date: "",
+    });
+    onFilter({
+      budget: "",
+      destination: "",
+      departure: "all",
+      date: "",
+    }); // reset luôn
+  };
+  const applyFilters = () => {
+    onFilter(filters);
+  };
+
   // gọi callback mỗi khi filter thay đổi
   useEffect(() => {
-    onFilter(filters);
+    if (filters.budget || filters.destination) onFilter(filters);
   }, [filters, onFilter]);
 
   return (
-    <div className="px-2 sticky top-20 ">
+    <div className="px-2 sticky top-20">
       <h3 className="text-2xl font-bold mb-4">BỘ LỌC TÌM KIẾM</h3>
 
       {/* Ngân sách */}
-        {active ? (
-        <div className="mb--4">
-          <label className="flex text-lg font-medium mb-4 justify-between">Ngân sách</label>
-          <button onClick={handleClear} className="border rounded-sm text-blue-400 hover:cursor-pointer w-1/4 bg-gray-200 hover:text-red-300">Xóa</button>
-          </div>
-        ):(
-          <div className="mb-4">
-          <label className="flex text-lg font-medium mb-4 justify-between">Ngân sách</label>
+      <div className="mb-4">
+        <label className="flex text-lg font-medium mb-4 justify-between">
+          Ngân sách
+          {filters.budget && (
+            <button
+              onClick={handleClear}
+              className="border rounded-sm text-blue-400 hover:cursor-pointer px-2 bg-gray-200 hover:text-red-500"
+            >
+              Xóa
+            </button>
+          )}
+        </label>
 
-          <div className="space-y-3 flex flex-col text-gray-500 justify-center items-center ">
-          <button onClick={handleActive} className="rounded-lg border w-2/3 p-1 hover:bg-blue-300">
+        <div className="space-y-3 flex flex-col text-gray-500 justify-center items-center">
+          <button
+            onClick={() => handleBudgetSelect("under-2m")}
+            className={`rounded-lg border w-2/3 p-1 ${
+              filters.budget === "under-2m"
+                ? "bg-blue-400 text-white"
+                : "hover:bg-blue-300"
+            }`}
+          >
             Dưới 2 triệu
           </button>
-          <button className="rounded-lg border w-2/3 p-1 hover:bg-blue-300">
+          <button
+            onClick={() => handleBudgetSelect("2-5m")}
+            className={`rounded-lg border w-2/3 p-1 ${
+              filters.budget === "2-5m"
+                ? "bg-blue-400 text-white"
+                : "hover:bg-blue-300"
+            }`}
+          >
             2 - 5 triệu
           </button>
-          <button className="rounded-lg border w-2/3 p-1 hover:bg-blue-300">
-           Trên 5 triệu
+          <button
+            onClick={() => handleBudgetSelect("over-5m")}
+            className={`rounded-lg border w-2/3 p-1 ${
+              filters.budget === "over-5m"
+                ? "bg-blue-400 text-white"
+                : "hover:bg-blue-300"
+            }`}
+          >
+            Trên 5 triệu
           </button>
-        </div></div>
-        )}
-        
+        </div>
+      </div>
 
       {/* Địa điểm đến */}
       <div className="mb-4">
@@ -83,10 +128,10 @@ export const FilterTour: React.FC<FilterTourProps> = ({ onFilter }) => {
           className="border rounded-lg p-2 w-full focus:ring-2 focus:ring-blue-500 outline-none"
         >
           <option value="all">Tất cả</option>
-          <option value="hcm">TP.HCM</option>
-          <option value="hanoi">Hà Nội</option>
-          <option value="danang">Đà Nẵng</option>
-          <option value="hue">Huế</option>
+          <option value="TP.HCM">TP.HCM</option>
+          <option value="Hà Nội">Hà Nội</option>
+          <option value="Đà Nẵng">Đà Nẵng</option>
+          <option value="Huế">Huế</option>
         </select>
       </div>
 
@@ -100,7 +145,10 @@ export const FilterTour: React.FC<FilterTourProps> = ({ onFilter }) => {
           className="border rounded-lg p-2 w-full focus:ring-2 focus:ring-blue-500 outline-none"
         />
       </div>
-      <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+      <button
+        onClick={applyFilters}
+        className="bg-blue-500 text-white px-4 py-1 rounded w-full hover:bg-blue-600"
+      >
         Áp dụng
       </button>
     </div>
