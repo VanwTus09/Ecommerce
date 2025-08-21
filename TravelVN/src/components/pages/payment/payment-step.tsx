@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, CreditCard, FileText, CheckCircle } from "lucide-react";
+import { CreditCard, FileText, CheckCircle } from "lucide-react";
 import type { JSX } from "react";
-import { useNavigate } from "react-router-dom";
 
 type Step = {
   id: number;
@@ -20,19 +18,9 @@ interface PaymentStepperProps {
 }
 
 export default function PaymentStepper({ currentStep }: PaymentStepperProps) {
-  const navigate = useNavigate();
   return (
     <div className="w-full max-w-4xl mx-auto py-6">
-      {/* Quay lại */}
-      <div className="flex items-center gap-2 mb-8 mx-1  ">
-        <ChevronLeft className="w-5 h-5" />
-        <Button
-          onClick={() => navigate(-1)}
-          className="text-sm font-medium hover:underline bg-gray-400 "
-        >
-          Quay lại
-        </Button>
-      </div>
+      
 
       {/* Title */}
 

@@ -26,7 +26,7 @@ export const TourNote = () => {
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger className="bg-gray-100 text-lg font-medium text-center "><span className="ml-2">Giá tour không bao gồm</span></AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-base">
               - Vé máy bay khứ hồi TP.HCM <br />
               – Singapore// Malaysia <br />
               - TP.HCM (bao gồm 7kg hành lý xách tay và 20kg hành lý ký gửi) <br />
@@ -38,7 +38,7 @@ export const TourNote = () => {
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger className="bg-gray-100 text-lg font-medium text-center "><span className="ml-2">Điều kiện thanh toán</span></AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-base">
               - Vé máy bay khứ hồi TP.HCM <br />
               – Singapore// Malaysia <br />
               - TP.HCM (bao gồm 7kg hành lý xách tay và 20kg hành lý ký gửi) <br />
@@ -50,7 +50,7 @@ export const TourNote = () => {
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger className="bg-gray-100 text-lg font-medium text-center "><span className="ml-2">Điều kiện đăng ký</span></AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-base">
               - Vé máy bay khứ hồi TP.HCM <br />
               – Singapore// Malaysia <br />
               - TP.HCM (bao gồm 7kg hành lý xách tay và 20kg hành lý ký gửi) <br />
@@ -62,7 +62,7 @@ export const TourNote = () => {
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger className="bg-gray-100 text-lg font-medium text-center "><span className="ml-2">Lưu ý về chuyển hoặc hủy tour</span></AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-base">
               - Vé máy bay khứ hồi TP.HCM <br />
               – Singapore// Malaysia <br />
               - TP.HCM (bao gồm 7kg hành lý xách tay và 20kg hành lý ký gửi) <br />
@@ -74,7 +74,7 @@ export const TourNote = () => {
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger className="bg-gray-100 text-lg font-medium text-center "><span className="ml-2">Thông tin về VISA</span></AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-base">
               - Vé máy bay khứ hồi TP.HCM <br />
               – Singapore// Malaysia <br />
               - TP.HCM (bao gồm 7kg hành lý xách tay và 20kg hành lý ký gửi) <br />
