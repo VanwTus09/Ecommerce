@@ -7,7 +7,10 @@ const URI = process.env.MONGODB_URI;
 
 export const mongooseConnection = () => {
   mongoose
-    .connect(URI)
+    .connect(URI , {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
     .then(() => {
       console.log("Connected to Mongo DB");
     })
@@ -15,5 +18,3 @@ export const mongooseConnection = () => {
       console.log("err", err);
     });
 };
-//tunguyen05112004
-// s1yFYrrxpzapiGvw

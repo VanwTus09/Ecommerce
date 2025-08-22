@@ -18,6 +18,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { PaymentForm } from "./Payment-form";
+import PaymentQRCode from "./payment-qrcode";
 const formSchema = z.object({
   phone: z.string(),
   name: z.string().min(6),
@@ -171,7 +172,7 @@ export const PaymentPage = () => {
         </div>
       </div>
       
-      
+      <PaymentQRCode/>
       {/* Footer */}
       <Footer />
     </div>
