@@ -1,7 +1,5 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { SigninForm } from "./components/modals/Signin";
 import Home from "./components/pages/Home/home";
-import { SignupForm } from "./components/modals/Signup";
 import { ListTour } from "./components/pages/Tours/ListTour";
 import { TourDetail } from "./components/pages/Tours/TourDetail";
 import { Toaster } from "sonner"
