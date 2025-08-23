@@ -5,16 +5,12 @@ dotenv.config();
 
 const URI = process.env.MONGODB_URI;
 
-export const mongooseConnection = () => {
-  mongoose
-    .connect(URI , {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
-    .then(() => {
-      console.log("Connected to Mongo DB");
-    })
-    .catch((err) => {
-      console.log("err", err);
-    });
+export const mongooseConnection = async () => {
+  try {
+    await mongoose.connect(URI)
+    console.log("✅ MongoDB Atlas connected to TravelVn");
+  } catch (error) {
+    console.log("err", error);
+  }
+  
 };

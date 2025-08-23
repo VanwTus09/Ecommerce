@@ -1,6 +1,7 @@
 import axios from "axios"
 export const AxiosInstance = axios.create({
-    baseURL : 'https://ecommerce-travelvn.onrender.com'
+    baseURL :  "http://localhost:5173/"
+    // 'https://ecommerce-travelvn.onrender.com'
 })
 // Add a request interceptor
 AxiosInstance.interceptors.request.use(function (config) {
