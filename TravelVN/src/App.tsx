@@ -12,8 +12,6 @@ function App() {
       <Toaster richColors position="top-right" />
       <Routes>
         //Public routes
-        <Route path="/Signin" element={<SigninForm />} />
-        <Route path="/Signup" element={<SignupForm />} />
         <Route path="/" element={<Home />} />
         <Route path="/ListTour" element={<ListTour/>}/>
         <Route path="/TourDetail/:id" element={<TourDetail/>}/>
