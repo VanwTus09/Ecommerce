@@ -58,4 +58,4 @@ const schema = new mongoose.Schema({
 });
 
 // Tạo model
-export const TourModel = mongoose.model("Tour", schema);
+export const TourModel = mongoose.model("Tour", schema , "tours");

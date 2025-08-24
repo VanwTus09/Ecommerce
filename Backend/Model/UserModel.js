@@ -17,4 +17,4 @@ const schema = new mongoose.Schema({
         unique : true,  
     },
 })
-export const UserModel = mongoose.model("User" , schema)
+export const UserModel = mongoose.model("User" , schema, "users")
