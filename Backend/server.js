@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 //
 app.use(cors({
-  origin: "https://travelvietnam-drab.vercel.app/", // hoặc cổng FE của bạn
+  origin: "https://travelvietnam-drab.vercel.app", // hoặc cổng FE của bạn
   credentials: true
 }));
 // Route test
