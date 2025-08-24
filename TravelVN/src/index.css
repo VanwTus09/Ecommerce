@@ -1,5 +1,22 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "atropos/css";
+@keyframes snow {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0.2;
+  }
+}
+
+.animate-snow {
+  animation-name: snow;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
 
 @custom-variant dark (&:is(.dark *));
 

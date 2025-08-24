@@ -1,12 +1,16 @@
-import React from 'react';
-import type { LucideIcon } from 'lucide-react';
+import React from "react";
+import type { LucideIcon } from "lucide-react";
 interface FeatureCardProps {
   icon: LucideIcon;
   title: string;
   description: string;
 }
 
-export const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description }) => {
+export const FeatureCard: React.FC<FeatureCardProps> = ({
+  icon: Icon,
+  title,
+  description,
+}) => {
   return (
     <div className="bg-white p-8 rounded-2xl shadow-xl transform hover:scale-105 transition-all duration-300">
       <div className="w-16 h-16 bg-[#4741A6] rounded-full flex items-center justify-center mx-auto mb-6">
@@ -17,4 +21,3 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, des
     </div>
   );
 };
-
