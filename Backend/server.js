@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 // Cấu hình routers
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRouter);
-app.use("/api/tour",tourRouter);
+app.use("/api/tours",tourRouter);
 
 app.listen(port, () => {
   console.log(`🚀 Server running at http://localhost:${port}`);
